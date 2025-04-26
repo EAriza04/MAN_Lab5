@@ -27,7 +27,7 @@ public class BoundedQueueTest {
     }
 
     @Test
-    @DisplayName("Test put method")
+    @DisplayName("Test put method with empty queue")
     /*
      * Asertos:
      * - La cola no debería estar vacía al añadir elementos.
@@ -35,10 +35,8 @@ public class BoundedQueueTest {
      * - La cola debería contener los elementos añadidos en el orden correcto.
      * - La cola debería empezar con el primer elemento.
      * - La cola debería terminar con el último elemento.
-     * - La cola debería lanzar una excepción al intentar añadir un elemento a una cola llena.
-     * - La cola debería lanzar una excepción al intentar añadir un elemento nulo.
     */
-    public void testPutAssertJ() {
+    public void put_EmptyQueue_InsertsElements() {
         // Act
         queue.put(1);
         queue.put(2);
@@ -53,17 +51,39 @@ public class BoundedQueueTest {
             .containsExactly(1, 2, 3, 4, 5)
             .startsWith(1)
             .endsWith(5);
+    }
 
+    @Test
+    @DisplayName("Test put method with null value")
+    /*
+     * Asertos:
+     * - La cola debería lanzar una IllegalArgumentException al intentar añadir un valor nulo.
+    */
+    public void put_NullValue_ThrowsIllegalArgumentException() {
+        // Act + Assert
+        assertThatThrownBy(() -> queue.put(null))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("put: element cannot be null");
+    }
+
+    @Test
+    @DisplayName("Test put method with full queue")
+    /*
+     * Asertos:
+     * - La cola debería lanzar una FullBoundedQueueException al intentar añadir un elemento a una cola llena.
+    */
+    public void put_FullQueue_ThrowsFullBoundedQueueException() {
+        // Arrange
+        queue.put(1);
+        queue.put(2);
+        queue.put(3);
+        queue.put(4);
+        queue.put(5);
+
+        // Act + Assert
         assertThatThrownBy(() -> queue.put(6))
             .isInstanceOf(FullBoundedQueueException.class)
             .hasMessageContaining("put: full bounded queue");
-
-        assertThatThrownBy(() -> {
-                BoundedQueue<Integer> nullQueue = new ArrayBoundedQueue<>(5); 
-                nullQueue.put(null); 
-            })
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("put: element cannot be null");
     }
     
     @Test
