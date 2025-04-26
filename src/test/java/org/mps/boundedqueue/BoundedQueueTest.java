@@ -1,3 +1,5 @@
+// Eduardo Ariza Abad y Enrique Ibáñez Rico
+
 package org.mps.boundedqueue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +15,15 @@ public class BoundedQueueTest {
     public void setUp() {
         // Arrange
         queue = new ArrayBoundedQueue<>(5);
+    }
+
+    @Test
+    @DisplayName("Constructor with size 0 throws IllegalArgumentException")
+    public void constructorWithSize0_ThrowsIllegalArgumentException() {
+        // Act + Assert
+        assertThatThrownBy(() -> new ArrayBoundedQueue<>(0))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("ArrayBoundedException: capacity must be positive");
     }
 
     @Test
