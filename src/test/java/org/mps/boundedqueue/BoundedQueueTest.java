@@ -19,6 +19,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("Constructor with size 0 throws IllegalArgumentException")
+    /*
+     * Asertos:
+     * - La cola debería lanzar una IllegalArgumentException al intentar crear una cola con tamaño 0.
+    */
     public void constructorWithSize0_ThrowsIllegalArgumentException() {
         // Act + Assert
         assertThatThrownBy(() -> new ArrayBoundedQueue<>(0))
@@ -88,6 +92,10 @@ public class BoundedQueueTest {
     
     @Test
     @DisplayName("get() throws EmptyBoundedQueueException if the queue is empty")
+    /*
+     * Asertos:
+     * - La cola debería lanzar una EmptyBoundedQueueException al intentar obtener un elemento de una cola vacía.
+    */
     public void get_EmptyQueue_ThrowsEmptyBoundedQueueException() {
         // Act + Assert
         assertThatThrownBy(() -> queue.get())
@@ -97,6 +105,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("get() returns the first element in the queue")
+    /*
+     * Asertos:
+     * - La cola debería devolver el primer elemento al llamar a get() en una cola no vacía.
+    */
     public void get_NonEmptyQueue_ReturnsFirstElement() {
         // Arrange
         queue.put(1);
@@ -114,6 +126,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("isFull() returns true if the queue is full")
+    /*
+     * Asertos:
+     * - La cola debería devolver true al llamar a isFull() en una cola llena.
+    */
     public void isFull_FullQueue_ReturnsTrue() {
         // Arrange
         queue.put(1);
@@ -132,6 +148,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("isFull() returns false if the queue is not full")
+    /*
+     * Asertos:
+     * - La cola debería devolver false al llamar a isFull() en una cola no llena.
+    */
     public void isFull_NonFullQueue_ReturnsFalse() {
         // Arrange
         queue.put(1);
@@ -147,6 +167,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("isEmpty() returns true if the queue is empty")
+    /*
+     * Asertos:
+     * - La cola debería devolver true al llamar a isEmpty() en una cola vacía.
+    */
     public void isEmpty_EmptyQueue_ReturnsTrue() {
         // Act
         boolean result = queue.isEmpty();
@@ -158,6 +182,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("isEmpty() returns false if the queue is not empty")
+    /*
+     * Asertos:
+     * - La cola debería devolver false al llamar a isEmpty() en una cola no vacía.
+    */
     public void isEmpty_NonEmptyQueue_ReturnsFalse() {
         // Arrange
         queue.put(1);
@@ -172,6 +200,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("size() returns the number of elements in the queue")
+    /*
+     * Asertos:
+     * - La cola debería devolver el tamaño correcto al llamar a size() en una cola no vacía.
+    */
     public void size_NonEmptyQueue_ReturnsCorrectSize() {
         // Arrange
         queue.put(1);
@@ -189,6 +221,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("getFirst() returns the index of the position of the first element")
+    /*
+     * Asertos:
+     * - La cola debería devolver el índice del primer elemento al llamar a getFirst() en una cola no vacía.
+    */
     public void getFirst_Queue_ReturnsFirstIndex() {
         // Act
         int result = queue.getFirst();
@@ -201,6 +237,10 @@ public class BoundedQueueTest {
 
     @Test
     @DisplayName("getLast() returns the index of the position of the last element")
+    /*
+     * Asertos:
+     * - La cola debería devolver el índice del último elemento al llamar a getLast() en una cola no vacía.
+    */
     public void getLast_Queue_ReturnsLastIndex() {
         // Arrange
         queue.put(1);
